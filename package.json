@@ -1,0 +1,19 @@
+{
+  "name": "ottobrokerweb",
+  "version": "1.0.0",
+  "description": "Meant to interact with [OttoBot](https://github.com/lhillmer/OttoBot) and\r [OttoBroker](https://github.com/lhillmer/OttoBroker)",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lhillmer/OttoBrokerWeb.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lhillmer/OttoBrokerWeb/issues"
+  },
+  "homepage": "https://github.com/lhillmer/OttoBrokerWeb#readme"
+}
