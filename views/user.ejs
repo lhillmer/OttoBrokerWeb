@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>Ottobot Brokerage</title>
+    </head>
+    <body>
+        <h1><%= user.display_name %></h1>
+        <table border = "1">
+        <tr>
+            <th>Stock Symbol</th>
+            <th>Quantity</th>
+        </tr>
+        <% stocks.forEach(function(stock){ %>
+        <tr>
+            <td><%= stock.symbol %></td>
+            <td><%= stock.quantity %></td>
+        </tr>
+        <% }) %>
+        </table>
+    </body>
+</html>
