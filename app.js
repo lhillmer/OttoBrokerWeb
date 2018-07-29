@@ -42,11 +42,15 @@ app.get('/', function(req, res) {
 app.get('/user/:userId', function(req, res) {
     request('http://otto.runtimeexception.net/broker/user_info?userid='+req.params.userId, function (error, response, body) {
         var obj = JSON.parse(body)
-        var stockList = ParseUserStocks(obj)
-        res.render('user', {
-            user: obj.user,
-            stocks: stockList
-        })
+        if (obj.status == 'success') {
+            var stockList = ParseUserStocks(obj)
+            res.render('user', {
+                user: obj.user,
+                stocks: stockList
+            })
+        } else {
+            res.redirect('/')
+        }
     })
 });
 
