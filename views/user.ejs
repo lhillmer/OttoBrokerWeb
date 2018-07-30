@@ -1,20 +1,46 @@
-<html>
-    <head>
-        <title>Ottobot Brokerage</title>
-    </head>
-    <body>
+<% include partials/header %>
         <h1><%= user.display_name %></h1>
+        <h2>Assets</h2>
         <table border = "1">
         <tr>
             <th>Stock Symbol</th>
             <th>Quantity</th>
+            <th>Value</th>
         </tr>
-        <% stocks.forEach(function(stock){ %>
+        <% longs.forEach(function(stock){ %>
         <tr>
             <td><%= stock.symbol %></td>
             <td><%= stock.quantity %></td>
+            <td><%= stock.total %></td>
         </tr>
         <% }) %>
+        <tr>
+            <th colspan="2">Cash</th>
+            <td><%= user.balance %></td>
+        </tr>
+        <tr>
+            <th colspan="2">Total</th>
+            <td><%= user.assets %></td>
+        </tr>
         </table>
-    </body>
-</html>
+        <h2>Liabilities</h2>
+        <table border = "1">
+        <tr>
+            <th>Stock Symbol</th>
+            <th>Quantity</th>
+            <th>Value</th>
+        </tr>
+        <% shorts.forEach(function(stock){ %>
+        <tr>
+            <td><%= stock.symbol %></td>
+            <td><%= stock.quantity %></td>
+            <td><%= stock.total %></td>
+        </tr>
+        <% }) %>
+        <tr>
+            <th colspan="2">Total</th>
+            <td><%= user.liabilities %></td>
+        </tr>
+        </table>
+        <p><a href="/">Back</a></p>
+<% include partials/footer %>

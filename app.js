@@ -12,24 +12,8 @@ app.set('views', path.join(__dirname, 'views'))
 // Set Static Path
 app.use(express.static(path.join(__dirname, 'public')))
 
-function ParseUserStocks(object) {
-    var stockList = []
-    var stocks = object.user.stocks
-    for (i in stocks) {
-        var symbol = ''
-        var quantity = 0
-        var transactions = stocks[i]
-        for (j in transactions) {
-            symbol = transactions[j].symbol
-            quantity += parseInt(transactions[j].count)
-        }
-        stockList.push({symbol: symbol, quantity: quantity})
-    }
-    return stockList
-}
-
 // Route '/'
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
     request('http://otto.runtimeexception.net/broker/all_users?shallow=true', function (error, response, body) {
         var obj = JSON.parse(body)
         res.render('index', {
@@ -39,14 +23,34 @@ app.get('/', function(req, res) {
 });
 
 // Route '/user'
-app.get('/user/:userId', function(req, res) {
-    request('http://otto.runtimeexception.net/broker/user_info?userid='+req.params.userId, function (error, response, body) {
+app.get('/user/:userId', function (req, res) {
+    request('http://otto.runtimeexception.net/broker/user_info?userid=' + req.params.userId, function (error, response, body) {
         var obj = JSON.parse(body)
         if (obj.status == 'success') {
-            var stockList = ParseUserStocks(obj)
+            var long_list = []
+            var longs = obj.user.longs
+            Object.keys(longs).forEach(function (key) {
+                long_list.push({
+                    symbol: key,
+                    name: longs[key].name,
+                    quantity: longs[key].stock_count,
+                    total: longs[key].total_value
+                })
+            })
+            var short_list = []
+            var shorts = obj.user.shorts
+            Object.keys(shorts).forEach(function (key) {
+                short_list.push({
+                    symbol: key,
+                    name: shorts[key].name,
+                    quantity: shorts[key].stock_count,
+                    total: shorts[key].total_value
+                })
+            })
             res.render('user', {
                 user: obj.user,
-                stocks: stockList
+                longs: long_list,
+                shorts: short_list
             })
         } else {
             res.redirect('/')

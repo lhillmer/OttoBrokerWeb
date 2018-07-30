@@ -1,13 +1,8 @@
-<html>
-    <head>
-        <title>Ottobot Brokerage</title>
-    </head>
-    <body>
+<% include partials/header %>
         <h1>Users:</h1>
         <ul>
         <% users.forEach(function(user){ %>
             <li><a href="user/<%= user.id %>"><%= user.display_name %></a></li>
         <% }) %>
         </ul>
-    </body>
-</html>
+<% include partials/footer %>
