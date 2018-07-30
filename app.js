@@ -29,7 +29,6 @@ app.get('/user/:userId', function (req, res) {
         if (obj.status == 'success') {
             var holding_list = []
             var holdings = obj.user.holdings
-            console.log(holdings)
             Object.keys(holdings).forEach(function (key) {
                 holding_list.push({
                     symbol: key,
