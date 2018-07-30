@@ -27,14 +27,15 @@ app.get('/user/:userId', function (req, res) {
     request('http://otto.runtimeexception.net/broker/user_info?userid=' + req.params.userId, function (error, response, body) {
         var obj = JSON.parse(body)
         if (obj.status == 'success') {
-            var long_list = []
-            var longs = obj.user.longs
-            Object.keys(longs).forEach(function (key) {
-                long_list.push({
+            var holding_list = []
+            var holdings = obj.user.holdings
+            console.log(holdings)
+            Object.keys(holdings).forEach(function (key) {
+                holding_list.push({
                     symbol: key,
-                    name: longs[key].name,
-                    quantity: longs[key].stock_count,
-                    total: longs[key].total_value
+                    name: holdings[key].name,
+                    quantity: holdings[key].stock_count,
+                    total: holdings[key].total_value
                 })
             })
             var short_list = []
@@ -49,7 +50,7 @@ app.get('/user/:userId', function (req, res) {
             })
             res.render('user', {
                 user: obj.user,
-                longs: long_list,
+                holdings: holding_list,
                 shorts: short_list
             })
         } else {
