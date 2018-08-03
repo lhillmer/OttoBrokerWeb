@@ -1,6 +1,7 @@
 # Files
 .DS_Store
 .env
+package-lock.json
 
 # Directories
 .vscode/

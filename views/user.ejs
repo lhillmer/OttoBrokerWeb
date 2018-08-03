@@ -42,6 +42,6 @@
             <td><%= user.liabilities %></td>
         </tr>
         </table>
-        <h2>Net Worth: <u><%= user.assets-user.liabilities %></u></h2>
+        <h2>Net Worth: <u><%= (user.assets-user.liabilities).toFixed(2) %></u></h2>
         <p><a href="/">Back</a></p>
 <% include partials/footer %>
